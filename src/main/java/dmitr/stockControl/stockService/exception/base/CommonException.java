@@ -12,4 +12,8 @@ public abstract class CommonException extends RuntimeException {
         this.i18nMessageKey = i18nMessageKey;
         this.i18nArgs = i18nArgs;
     }
+
+    public CommonException(String i18nMessageKey) {
+        this(i18nMessageKey, null);
+    }
 }

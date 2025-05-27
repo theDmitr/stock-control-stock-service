@@ -6,6 +6,7 @@ import dmitr.stockControl.stockService.model.stockRecord.StockRecordDto;
 import dmitr.stockControl.stockService.model.stockRecord.StockRecordUpdateDto;
 import dmitr.stockControl.stockService.service.face.stockRecord.StockRecordService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,11 +30,13 @@ public class StockRecordRestController {
         return stockRecordService.getStockRecord(new StockRecordId(stockHolderId, productId));
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping
     public StockRecordDto createStockRecord(@RequestBody StockRecordCreateDto stockRecordDto) {
         return stockRecordService.createStockRecord(stockRecordDto);
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PatchMapping("/stockHolder/{stockHolderId}/product/{productId}")
     public StockRecordDto updateStockRecord(@PathVariable UUID stockHolderId,
                                             @PathVariable UUID productId,
@@ -41,6 +44,7 @@ public class StockRecordRestController {
         return stockRecordService.updateStockRecord(new StockRecordId(stockHolderId, productId), stockRecordDto);
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @DeleteMapping("/stockHolder/{stockHolderId}/product/{productId}")
     public void deleteStockRecord(@PathVariable UUID stockHolderId,
                                   @PathVariable UUID productId) {

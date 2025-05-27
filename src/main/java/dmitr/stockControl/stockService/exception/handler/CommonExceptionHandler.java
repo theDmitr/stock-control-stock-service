@@ -2,6 +2,7 @@ package dmitr.stockControl.stockService.exception.handler;
 
 import dmitr.stockControl.stockService.exception.base.BadRequestException;
 import dmitr.stockControl.stockService.exception.base.NotFoundException;
+import dmitr.stockControl.stockService.exception.base.UnauthorizedException;
 import dmitr.stockControl.stockService.exception.handler.response.CommonErrorResponse;
 import dmitr.stockControl.stockService.helper.exception.HttpExceptionHelper;
 import feign.FeignException;
@@ -30,6 +31,11 @@ public class CommonExceptionHandler {
     @ExceptionHandler
     public ResponseEntity<CommonErrorResponse> handle(BadRequestException e) {
         return httpExceptionHelper.generateErrorResponseEntity(e, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<CommonErrorResponse> handle(UnauthorizedException e) {
+        return httpExceptionHelper.generateErrorResponseEntity(e, HttpStatus.UNAUTHORIZED);
     }
 
     /**
