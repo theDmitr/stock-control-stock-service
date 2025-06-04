@@ -1,0 +1,9 @@
+app:
+  cors:
+    allowed-origins:
+      - "http://localhost:80"
+      - "http://127.0.0.1:80"
+    allowed-methods: "*"
+    allowed-headers: "*"
+    allow-credentials: true
+    max-age: 3600
