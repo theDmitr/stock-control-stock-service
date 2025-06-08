@@ -18,6 +18,6 @@ public class StockRecord {
     @EmbeddedId
     private StockRecordId id;
 
-    @Column(name = "count", nullable = false)
-    private Long count;
+    @Column(name = "quantity", nullable = false)
+    private Long quantity;
 }

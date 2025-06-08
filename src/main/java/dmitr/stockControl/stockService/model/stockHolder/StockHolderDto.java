@@ -13,4 +13,6 @@ public class StockHolderDto {
 
     private UUID id;
     private String name;
+    private String description;
+    private String image;
 }

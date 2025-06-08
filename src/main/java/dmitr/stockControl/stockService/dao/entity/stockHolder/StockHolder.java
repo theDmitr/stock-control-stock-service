@@ -25,4 +25,10 @@ public class StockHolder {
 
     @Column(name = "name", nullable = false, length = 64)
     private String name;
+
+    @Column(name = "description", nullable = false, length = 1024)
+    private String description;
+
+    @Column(name = "image")
+    private String image;
 }

@@ -11,4 +11,6 @@ import lombok.Setter;
 public class StockHolderCreateDto implements StockHolderBaseValidation {
 
     private String name;
+    private String description;
+    private String image;
 }

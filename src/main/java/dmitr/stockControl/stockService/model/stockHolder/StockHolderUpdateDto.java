@@ -14,4 +14,6 @@ public class StockHolderUpdateDto implements StockHolderBaseValidation {
 
     private UUID id;
     private String name;
+    private String description;
+    private String image;
 }

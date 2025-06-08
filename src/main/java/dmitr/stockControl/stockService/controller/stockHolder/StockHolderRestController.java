@@ -1,5 +1,7 @@
 package dmitr.stockControl.stockService.controller.stockHolder;
 
+import dmitr.stockControl.stockService.controller.stockHolder.response.StockHolderInfoResponseDto;
+import dmitr.stockControl.stockService.controller.stockHolder.response.StockHolderListViewResponseDto;
 import dmitr.stockControl.stockService.model.stockHolder.StockHolderCreateDto;
 import dmitr.stockControl.stockService.model.stockHolder.StockHolderDto;
 import dmitr.stockControl.stockService.model.stockHolder.StockHolderUpdateDto;
@@ -12,7 +14,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/v1/stock_holders")
+@RequestMapping("/api/v1/stock-holders")
 @RequiredArgsConstructor
 public class StockHolderRestController {
 
@@ -26,6 +28,16 @@ public class StockHolderRestController {
     @GetMapping("/{stockHolderId}")
     public StockHolderDto getStockHolder(@PathVariable UUID stockHolderId) {
         return stockHolderService.getStockHolder(stockHolderId);
+    }
+
+    @GetMapping("/list/page-view")
+    public List<StockHolderListViewResponseDto> getStockHolderListView() {
+        return stockHolderService.getStockHolderListView();
+    }
+
+    @GetMapping("/{stockHolderId}/info")
+    public StockHolderInfoResponseDto getStockHolderInfo(@PathVariable UUID stockHolderId) {
+        return stockHolderService.getStockHolderInfo(stockHolderId);
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")

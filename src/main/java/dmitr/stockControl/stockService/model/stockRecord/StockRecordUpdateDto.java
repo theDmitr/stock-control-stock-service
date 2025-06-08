@@ -10,5 +10,5 @@ import lombok.Setter;
 @NoArgsConstructor
 public class StockRecordUpdateDto implements StockRecordBaseValidation {
 
-    private Long count;
+    private Long quantity;
 }

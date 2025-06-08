@@ -1,5 +1,6 @@
 package dmitr.stockControl.stockService.controller.stockRecord;
 
+import dmitr.stockControl.stockService.controller.stockRecord.response.StockRecordListViewResponseDto;
 import dmitr.stockControl.stockService.dao.entity.stockRecord.StockRecordId;
 import dmitr.stockControl.stockService.model.stockRecord.StockRecordCreateDto;
 import dmitr.stockControl.stockService.model.stockRecord.StockRecordDto;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/v1/stock_records")
+@RequestMapping("/api/v1/stock-records")
 @RequiredArgsConstructor
 public class StockRecordRestController {
 
@@ -28,6 +29,11 @@ public class StockRecordRestController {
     public StockRecordDto getStockRecord(@PathVariable UUID stockHolderId,
                                          @PathVariable UUID productId) {
         return stockRecordService.getStockRecord(new StockRecordId(stockHolderId, productId));
+    }
+
+    @GetMapping("/list/page-view")
+    public List<StockRecordListViewResponseDto> getStockRecordsListView() {
+        return stockRecordService.getStockHolderListView();
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")

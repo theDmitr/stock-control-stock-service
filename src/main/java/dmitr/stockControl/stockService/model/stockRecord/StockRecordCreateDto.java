@@ -12,5 +12,5 @@ import lombok.Setter;
 public class StockRecordCreateDto implements StockRecordBaseValidation {
 
     private StockRecordId id;
-    private Long count;
+    private Long quantity;
 }

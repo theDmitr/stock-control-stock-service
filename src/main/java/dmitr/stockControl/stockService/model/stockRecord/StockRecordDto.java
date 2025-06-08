@@ -11,5 +11,5 @@ import lombok.Setter;
 public class StockRecordDto {
 
     private StockRecordId id;
-    private Long count;
+    private Long quantity;
 }
