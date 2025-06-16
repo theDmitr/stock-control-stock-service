@@ -19,11 +19,10 @@ import dmitr.stockControl.stockService.service.face.stockRecord.StockRecordServi
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
+import static dmitr.stockControl.stockService.utils.Constants.EMPTY_IMAGE_URL;
 import static io.micrometer.common.util.StringUtils.isBlank;
 
 @Service
@@ -53,11 +52,16 @@ public class StockHolderServiceImpl implements StockHolderService {
 
         return stockHolders.stream()
                 .map(stockHolder -> {
-                    List<StockRecord> stockRecords = stockRecordsMap.get(stockHolder.getId());
-                    Long quantity = stockRecords != null ? (long) stockRecords.size() : 0L;
+                    List<StockRecord> stockRecords = Optional.ofNullable(stockRecordsMap.get(stockHolder.getId()))
+                            .orElse(Collections.emptyList());
+
+                    Long quantity = stockRecords.stream()
+                            .mapToLong(StockRecord::getQuantity)
+                            .sum();
+
                     return StockHolderListViewResponseDto.builder()
                             .stockHolderName(stockHolder.getName())
-                            .stockHolderImage(stockHolder.getImage())
+                            .stockHolderImage(stockHolder.getImage() != null ? stockHolder.getImage() : EMPTY_IMAGE_URL)
                             .stockHolderId(stockHolder.getId())
                             .stockRecordsQuantity(quantity)
                             .build();
@@ -78,7 +82,7 @@ public class StockHolderServiceImpl implements StockHolderService {
 
         return StockHolderInfoResponseDto.builder()
                 .stockHolderName(stockHolder.getName())
-                .stockHolderImage(stockHolder.getImage())
+                .stockHolderImage(stockHolder.getImage() != null ? stockHolder.getImage() : EMPTY_IMAGE_URL)
                 .stockHolderId(stockHolder.getId())
                 .stockRecordsQuantity(quantity)
                 .stockRecords(productStockRecords)
